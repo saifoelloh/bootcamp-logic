@@ -14,7 +14,8 @@
     "nedb": "^1.8.0",
     "nodemon": "^1.18.4",
     "body-parser": "^1.18.3",
-    "cors": "^2.8.4"
+    "cors": "^2.8.4",
+    "moment": "^2.22.2"
   },
   "engines": {
     "node": "8.x"

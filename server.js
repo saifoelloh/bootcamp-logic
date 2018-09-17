@@ -2,11 +2,12 @@
 // where your node app starts
 
 // init project
-var express = require('express');
-var bodyParser = require('body-parser');
-var dataStore = require('nedb');
-var cors = require('cors');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const dataStore = require('nedb');
+const cors = require('cors');
+const momentJS = require('moment');
+const app = express();
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -15,13 +16,36 @@ var app = express();
 app.use(express.static('public'));
 app.use(cors());
 app.use(bodyParser.json());
+momentJS.locale('id');
 
 var db = new dataStore({filename: 'path/to/file.json', autoload: true});
 
 // http://expressjs.com/en/starter/basic-routing.html
+/**
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
+*/
+
+app.get('/', (req,res)=>{
+  db.find({}, (err,data)=>{
+    if(err)
+      throw err;
+    else
+      res.send(data);
+  })
+})
+
+app.post('/', (req,res)=>{
+  let day = momentJS().format('LLLL');
+  let doc = { ...req.body, day };
+  db.insert(doc,(err,data)=>{
+    if(err)
+      throw err
+    else
+      res.send('data has posted')
+  })
+})
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
