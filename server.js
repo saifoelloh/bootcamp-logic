@@ -47,6 +47,21 @@ app.post('/', (req,res)=>{
   })
 })
 
+app.get('/:id', (req,res)=>{
+  db.findOne({_id: req.params.id}, {}, (err,data)=>{
+    if(err)
+      throw err
+    else
+      res.send(data)
+  })
+})
+
+app.put('/:id',(req,res)=>{
+  let day = momentJS().format('LLLL');
+  let doc = { ...req.body, day };
+  db.update({_id: req.params.id}, doc, {}, (err,data)=>
+})
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
