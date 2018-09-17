@@ -59,7 +59,21 @@ app.get('/:id', (req,res)=>{
 app.put('/:id',(req,res)=>{
   let day = momentJS().format('LLLL');
   let doc = { ...req.body, day };
-  db.update({_id: req.params.id}, doc, {}, (err,data)=>
+  db.update({_id: req.params.id}, doc, {}, (err,data)=>{
+    if(err)
+      throw err
+    else
+      res.send('Your data has been updated')
+  })
+})
+
+app.delete('/:id', (req,res)=>{
+  db.remove({_id: req.params.id}, {}, (err,data)=>{
+    if(err)
+      throw err
+    else
+      res.send('Your data has been deleted')
+  })
 })
 
 // listen for requests :)
