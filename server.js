@@ -53,7 +53,7 @@ app.post('/', (req, res) => {
     req.body.email == null ||
     req.body.faculty == null
   ) {
-    res.json({
+    res.status(301).json({
       status_code : 301,
       message : 'please fill all form!'
     })
@@ -62,7 +62,7 @@ app.post('/', (req, res) => {
       if (err)
         throw err
       else
-        res.json({
+        res.status(200).json({
           status_code: 200,
           message : 'data saved!'
         })
