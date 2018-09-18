@@ -46,12 +46,12 @@ app.post('/', (req, res) => {
   };
   // empty handle data
   if (
-    req.body.name === '' ||
-    req.body.nim === '' ||
-    req.body.phone === '' ||
-    req.body.gender === '' ||
-    req.body.email === '' ||
-    req.body.faculty === ''
+    req.body.name == null ||
+    req.body.nim == null ||
+    req.body.phone == null ||
+    req.body.gender == null ||
+    req.body.email == null ||
+    req.body.faculty == null
   ) {
     res.json({
       status_code : 301,
