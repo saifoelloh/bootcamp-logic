@@ -27,6 +27,7 @@
   "keywords": [
     "node",
     "glitch",
-    "express"
+    "express",
+    "heroku"
   ]
 }
